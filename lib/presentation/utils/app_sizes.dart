@@ -1,3 +1,4 @@
+
 final class AppSizes {
   
   // button.dart
@@ -14,11 +15,12 @@ final class AppSizes {
 
   // calendarview.dart
   static const double calendarDaysOfWeekHeight = 32.0;
-  static const double calendarDayFontSize = 13.0;
-  static const double calendarDayContainerSize = 20.0;
-  static const double calendarDayCircleSize = 5.0;
-  static const double calendarDaySpacing = 5.0;
+  static const double calendarDayFontSize = 0.03;
+  static const double calendarDayContainerSize = 0.06;
+  static const double calendarDayCircleSize = 0.0125;
+  static const double calendarDaySpacing = 0.01;
   static const double calendarListViewVerticalInset = 4.0;
   static const double calendarListViewHorizontalInset = 8.0;
   static const double calendarListViewTileHorizontalInset = 8.0;
+  static const double calendarListViewLeadingSpacing = 8.0;
 }
