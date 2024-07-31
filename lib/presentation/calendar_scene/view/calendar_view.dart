@@ -1,6 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:medihabit/domain/entity/medication.dart';
 import '../../utils/ui_utils.dart';
+class PillListSection extends StatelessWidget {
+  final DateTime? selectedDay;
+  final List<Medication> medications;
+
+  const PillListSection({this.selectedDay, required this.medications});
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildPillList();
+  }
+
+  Widget _buildPillList() {
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      itemCount: medications.isEmpty ? 1 : medications.length,
+      itemBuilder: (context, index) {
+        if (medications.isEmpty) {
+          return _buildNoMedicationTile();
+        } else {
+          return _buildMedicationTile(medications[index]);
+        }
+      },
+    );
+  }
+
+  Widget _buildNoMedicationTile() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewHorizontalInset, vertical: AppSizes.calendarListViewVerticalInset),
+      child: Container(
+        color: Colors.white,
+        child: const ListTile(
+          title: Text('해당 날짜에 등록된 약이 없습니다!(추후 이미지로 대체하기)'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMedicationTile(Medication medication) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewHorizontalInset, vertical: AppSizes.calendarListViewVerticalInset),
+      child: Container(
+        color: Colors.white,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewTileHorizontalInset),
+          leading: Container(
+            width: AppSizes.calendarDayCircleSize.toDouble(),
+            height: AppSizes.calendarDayCircleSize.toDouble(),
+            margin: const EdgeInsets.only(right: AppSizes.calendarListViewLeadingSpacing),
+            color: medication.color,
+          ),
+          title: Text(medication.name),
+          subtitle: Text(medication.dosage),
+        ),
+      ),
+    );
+  }
+}
+
 final class CustomDayWidget extends StatelessWidget {
   final DateTime date;
   final bool isToday;
