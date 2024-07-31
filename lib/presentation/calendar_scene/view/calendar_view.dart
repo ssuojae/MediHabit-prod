@@ -50,9 +50,11 @@ final class _CalendarViewState extends State<CalendarView> {
   }
 
   Widget _buildPillListSection() {
-    return PillListSection(
-      selectedDay: _selectedDay,
-      medications: _getMedicationsForDay(_selectedDay ?? DateTime.now()),
+    return Expanded(
+      child: PillListSection(
+        selectedDay: _selectedDay,
+        medications: _getMedicationsForDay(_selectedDay ?? DateTime.now()),
+      ),
     );
   }
 
@@ -104,18 +106,23 @@ class CalendarSection extends StatelessWidget {
 
   TableCalendar _buildTableCalendar() {
     return TableCalendar(
-      locale: 'ko_KR', // 로케일 설정
       firstDay: DateTime.utc(2020, 1, 1),
       lastDay: DateTime.utc(2030, 12, 31),
       focusedDay: focusedDay,
       calendarFormat: calendarFormat,
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),
-      onDaySelected: onDaySelected,
+      onDaySelected: (selectedDay, focusedDay) {
+        onDaySelected(selectedDay, focusedDay);
+      },
+      onFormatChanged: (format) {
+        onFormatChanged(format);
+      },
+      onPageChanged: (focusedDay) {
+        onPageChanged(focusedDay);
+      },
       daysOfWeekHeight: AppSizes.calendarDaysOfWeekHeight,
       calendarStyle: _buildCalendarStyle(),
       headerStyle: _buildHeaderStyle(),
-      onFormatChanged: onFormatChanged,
-      onPageChanged: onPageChanged,
       calendarBuilders: _buildCalendarBuilders(),
     );
   }
@@ -192,16 +199,25 @@ class PillListSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewHorizontalInset, vertical: AppSizes.calendarListViewVerticalInset),
       child: Container(
         color: Colors.white,
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewTileHorizontalInset),
-          leading: Container(
-            width: AppSizes.calendarDayCircleSize.toDouble(),
-            height: AppSizes.calendarDayCircleSize.toDouble(),
-            margin: const EdgeInsets.only(right: AppSizes.calendarListViewLeadingSpacing),
-            color: medication.color,
-          ),
-          title: Text(medication.name),
-          subtitle: Text(medication.dosage),
+        child: Row(
+          children: [
+            Container(
+              width: AppSizes.calendarColorThemeThickness,
+              height: AppSizes.calendarListTileHeight - AppSizes.calendarListTileVerticalPadding * 2,
+              decoration: BoxDecoration(
+                color: medication.color,
+                borderRadius: BorderRadius.circular(AppSizes.calendarColorThemeRadius),
+              ),
+              margin: const EdgeInsets.symmetric(vertical: AppSizes.calendarListTileVerticalPadding),
+            ),
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: AppSizes.calendarListViewTileHorizontalInset),
+                title: Text(medication.name),
+                subtitle: Text(medication.dosage),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -323,7 +339,7 @@ final class _CircleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * AppSizes.calendarDayCircleSize,
-      height: MediaQuery.of(context).size.width * AppSizes.calendarDayCircleSize, // 0.0125
+      height: MediaQuery.of(context).size.width * AppSizes.calendarDayCircleSize,
       decoration: BoxDecoration(
         color: color.withOpacity(isTransparent ? 0.3 : 1.0),
         shape: BoxShape.circle,

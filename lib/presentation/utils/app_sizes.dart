@@ -21,6 +21,10 @@ final class AppSizes {
   static const double calendarDaySpacing = 0.01;
   static const double calendarListViewVerticalInset = 4.0;
   static const double calendarListViewHorizontalInset = 8.0;
-  static const double calendarListViewTileHorizontalInset = 8.0;
+  static const double calendarListViewTileHorizontalInset = 15.0;
   static const double calendarListViewLeadingSpacing = 8.0;
+  static const double calendarColorThemeThickness = 6.0;
+  static const double calendarColorThemeRadius = 4.0; 
+  static const double calendarListTileHeight = 72.0; 
+  static const double calendarListTileVerticalPadding = 12.0; 
 }
