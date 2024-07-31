@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-part 'login_state.freezed.dart';
+part '../../../generated/login_state.freezed.dart';
 
 
 @freezed
