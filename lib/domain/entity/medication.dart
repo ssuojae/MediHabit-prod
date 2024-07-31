@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'medication.freezed.dart';
-part 'medication.g.dart';
+part '../../generated/medication.freezed.dart';
+part '../../generated/medication.g.dart';
 
 @freezed
 class Medication with _$Medication {

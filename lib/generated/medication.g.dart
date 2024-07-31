@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'medication.dart';
+part of '../domain/entity/medication.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
