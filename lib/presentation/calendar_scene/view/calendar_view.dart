@@ -1,6 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:medihabit/domain/entity/medication.dart';
 import '../../utils/ui_utils.dart';
+class CalendarSection extends StatelessWidget {
+  final CalendarFormat calendarFormat;
+  final DateTime focusedDay;
+  final DateTime? selectedDay;
+  final Function(DateTime, DateTime) onDaySelected;
+  final Function(CalendarFormat) onFormatChanged;
+  final Function(DateTime) onPageChanged;
+  final List<Medication> medications;
+
+  const CalendarSection({
+    required this.calendarFormat,
+    required this.focusedDay,
+    required this.selectedDay,
+    required this.onDaySelected,
+    required this.onFormatChanged,
+    required this.onPageChanged,
+    required this.medications,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildTableCalendar();
+  }
+
+  TableCalendar _buildTableCalendar() {
+    return TableCalendar(
+      locale: 'ko_KR', // 로케일 설정
+      firstDay: DateTime.utc(2020, 1, 1),
+      lastDay: DateTime.utc(2030, 12, 31),
+      focusedDay: focusedDay,
+      calendarFormat: calendarFormat,
+      selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+      onDaySelected: onDaySelected,
+      daysOfWeekHeight: AppSizes.calendarDaysOfWeekHeight,
+      calendarStyle: _buildCalendarStyle(),
+      headerStyle: _buildHeaderStyle(),
+      onFormatChanged: onFormatChanged,
+      onPageChanged: onPageChanged,
+      calendarBuilders: _buildCalendarBuilders(),
+    );
+  }
+
+  CalendarStyle _buildCalendarStyle() {
+    return const CalendarStyle(
+      isTodayHighlighted: true,
+      todayDecoration: BoxDecoration(),
+      selectedTextStyle: TextStyle(color: AppColors.calendarTodayTextColor),
+      selectedDecoration: BoxDecoration(
+        color: AppColors.calendarSelectedBackground,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+
+  HeaderStyle _buildHeaderStyle() {
+    return const HeaderStyle(
+      formatButtonVisible: false,
+      leftChevronVisible: false,
+      rightChevronVisible: false,
+    );
+  }
+
+  CalendarBuilders _buildCalendarBuilders() {
+    return CalendarBuilders(
+      todayBuilder: (context, date, _) => CustomDayWidget(date: date, isToday: true, medications: medications),
+      selectedBuilder: (context, date, _) => CustomDayWidget(date: date, isSelected: true, medications: medications),
+      defaultBuilder: (context, date, _) => CustomDayWidget(date: date, isFuture: date.isAfter(DateTime.now()), medications: medications),
+      outsideBuilder: (context, date, _) => CustomDayWidget(date: date, isOutside: true, isFuture: date.isAfter(DateTime.now()), medications: medications),
+    );
+  }
+}
+
 class PillListSection extends StatelessWidget {
   final DateTime? selectedDay;
   final List<Medication> medications;
