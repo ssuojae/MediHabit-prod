@@ -2,6 +2,82 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:medihabit/domain/entity/medication.dart';
 import '../../utils/ui_utils.dart';
+
+final class CalendarView extends StatefulWidget {
+  const CalendarView({super.key});
+
+  @override
+  _CalendarViewState createState() => _CalendarViewState();
+}
+
+final class _CalendarViewState extends State<CalendarView> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: _buildAppBar(),
+      body: Column(
+        children: [
+          _buildCalendarSection(),
+          _buildPillListSection(),
+        ],
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      title: const Text('약 복용 스케쥴러', style: TextStyle(color: Colors.black)),
+      iconTheme: const IconThemeData(color: Colors.black),
+    );
+  }
+
+  Widget _buildCalendarSection() {
+    return CalendarSection(
+      calendarFormat: _calendarFormat,
+      focusedDay: _focusedDay,
+      selectedDay: _selectedDay,
+      onDaySelected: _onDaySelected,
+      onFormatChanged: _onFormatChanged,
+      onPageChanged: _onPageChanged,
+      medications: dummyMedications,
+    );
+  }
+
+  Widget _buildPillListSection() {
+    return PillListSection(
+      selectedDay: _selectedDay,
+      medications: _getMedicationsForDay(_selectedDay ?? DateTime.now()),
+    );
+  }
+
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    setState(() {
+      _selectedDay = selectedDay;
+      _focusedDay = focusedDay;
+    });
+  }
+
+  void _onFormatChanged(CalendarFormat format) {
+    setState(() {
+      _calendarFormat = format;
+    });
+  }
+
+  void _onPageChanged(DateTime focusedDay) {
+    _focusedDay = focusedDay;
+  }
+
+  List<Medication> _getMedicationsForDay(DateTime day) {
+    return dummyMedications.where((medication) => isSameDay(medication.dateTime, day)).toList();
+  }
+}
+
 class CalendarSection extends StatelessWidget {
   final CalendarFormat calendarFormat;
   final DateTime focusedDay;
