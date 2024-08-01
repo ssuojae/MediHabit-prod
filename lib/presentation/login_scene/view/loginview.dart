@@ -10,17 +10,19 @@ final class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: AppSizes.topSectionHeight,
-          child: _TopSection(),
-        ),
-        SizedBox(
-          height: AppSizes.bottomSectionHeight,
-          child: _BottomSection(loginViewModel: loginViewModel),
-        ),
-      ],
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(
+            height: AppSizes.topSectionHeight,
+            child: _TopSection(),
+          ),
+          SizedBox(
+            height: AppSizes.bottomSectionHeight,
+            child: _BottomSection(loginViewModel: loginViewModel),
+          ),
+        ],
+      ),
     );
   }
 }
