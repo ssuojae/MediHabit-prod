@@ -10,6 +10,8 @@ final class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    loginViewModel.listenToStateChanges(context);
+
     return Scaffold(
       body: Column(
         children: [
@@ -76,7 +78,7 @@ final class _BottomSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppButtons.loginButton(
-            onPressed: loginViewModel.authenticateWithGoogle,
+            onPressed: () => loginViewModel.authenticateWithGoogle(),
             backgroundColor: Colors.blue,
             textColor: Colors.white,
             text: AppStrings.googleLogin,
