@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../state_management/bloc.dart';
 
 
@@ -6,7 +8,10 @@ final class LoginViewModel {
 
   LoginViewModel({required this.loginBloc});
 
-  void authenticateWithGoogle() {
-    loginBloc.add(const LoginEvent.googleLoginRequested());
+  void authenticateWithGoogle(BuildContext context) {
+    loginBloc.add(LoginEvent.googleLoginRequested(context));
   }
+
+
+  
 }
