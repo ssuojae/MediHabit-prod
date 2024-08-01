@@ -6,5 +6,5 @@ part '../../../generated/login_event.freezed.dart';
 
 @freezed
 class LoginEvent with _$LoginEvent {
-  const factory LoginEvent.googleLoginRequested(BuildContext context) = GoogleLoginRequested;
+  const factory LoginEvent.googleLoginRequested() = GoogleLoginRequested;
 }

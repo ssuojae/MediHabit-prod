@@ -16,20 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginEvent {
-  BuildContext get context => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context) googleLoginRequested,
+    required TResult Function() googleLoginRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context)? googleLoginRequested,
+    TResult? Function()? googleLoginRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context)? googleLoginRequested,
+    TResult Function()? googleLoginRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,10 +48,6 @@ mixin _$LoginEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -60,8 +55,6 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res, LoginEvent>;
-  @useResult
-  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -73,30 +66,13 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? context = null,
-  }) {
-    return _then(_value.copyWith(
-      context: null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$GoogleLoginRequestedImplCopyWith<$Res>
-    implements $LoginEventCopyWith<$Res> {
+abstract class _$$GoogleLoginRequestedImplCopyWith<$Res> {
   factory _$$GoogleLoginRequestedImplCopyWith(_$GoogleLoginRequestedImpl value,
           $Res Function(_$GoogleLoginRequestedImpl) then) =
       __$$GoogleLoginRequestedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -106,77 +82,52 @@ class __$$GoogleLoginRequestedImplCopyWithImpl<$Res>
   __$$GoogleLoginRequestedImplCopyWithImpl(_$GoogleLoginRequestedImpl _value,
       $Res Function(_$GoogleLoginRequestedImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? context = null,
-  }) {
-    return _then(_$GoogleLoginRequestedImpl(
-      null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$GoogleLoginRequestedImpl implements GoogleLoginRequested {
-  const _$GoogleLoginRequestedImpl(this.context);
-
-  @override
-  final BuildContext context;
+  const _$GoogleLoginRequestedImpl();
 
   @override
   String toString() {
-    return 'LoginEvent.googleLoginRequested(context: $context)';
+    return 'LoginEvent.googleLoginRequested()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GoogleLoginRequestedImpl &&
-            (identical(other.context, context) || other.context == context));
+            other is _$GoogleLoginRequestedImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GoogleLoginRequestedImplCopyWith<_$GoogleLoginRequestedImpl>
-      get copyWith =>
-          __$$GoogleLoginRequestedImplCopyWithImpl<_$GoogleLoginRequestedImpl>(
-              this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context) googleLoginRequested,
+    required TResult Function() googleLoginRequested,
   }) {
-    return googleLoginRequested(context);
+    return googleLoginRequested();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context)? googleLoginRequested,
+    TResult? Function()? googleLoginRequested,
   }) {
-    return googleLoginRequested?.call(context);
+    return googleLoginRequested?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context)? googleLoginRequested,
+    TResult Function()? googleLoginRequested,
     required TResult orElse(),
   }) {
     if (googleLoginRequested != null) {
-      return googleLoginRequested(context);
+      return googleLoginRequested();
     }
     return orElse();
   }
@@ -211,13 +162,5 @@ class _$GoogleLoginRequestedImpl implements GoogleLoginRequested {
 }
 
 abstract class GoogleLoginRequested implements LoginEvent {
-  const factory GoogleLoginRequested(final BuildContext context) =
-      _$GoogleLoginRequestedImpl;
-
-  @override
-  BuildContext get context;
-  @override
-  @JsonKey(ignore: true)
-  _$$GoogleLoginRequestedImplCopyWith<_$GoogleLoginRequestedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory GoogleLoginRequested() = _$GoogleLoginRequestedImpl;
 }
