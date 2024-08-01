@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:medihabit/firebase_options.dart';
 import 'package:medihabit/init_dependencies.dart';
+import 'package:medihabit/presentation/calendar_scene/view/calendar_view.dart';
 import 'package:medihabit/presentation/login_scene/view/loginview.dart';
 
 
@@ -30,11 +31,11 @@ final class MyApp extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
         textTheme: GoogleFonts.juaTextTheme(),
       ),
-      home: Scaffold(
-        body: Center(
-          child: getIt<LoginView>(),
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => getIt<LoginView>(),
+        '/calendar': (context) => const CalendarView(),
+      },
     );
   }
 }
