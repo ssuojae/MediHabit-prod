@@ -17,21 +17,11 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     try {
       final userCredential = await event.when(
-        googleLoginRequested: _loginWithGoogle,
-        // appleLoginRequested: _loginWithApple,
-        // kakaoLoginRequested: _loginWithKakao,
+        googleLoginRequested: () => _loginWithGoogle(),
       );
-      emit(state.copyWith(
-        isLoading: false,
-        isAuthenticated: true,
-        user: userCredential.user,
-      ));
+      _handleLoginSuccess(emit, userCredential);
     } catch (error) {
-      emit(state.copyWith(
-        isLoading: false,
-        isAuthenticated: false,
-        error: error.toString(),
-      ));
+      _handleLoginError(emit, error);
     }
   }
 
@@ -39,11 +29,19 @@ final class LoginBloc extends Bloc<LoginEvent, LoginState> {
     return await userRepository.loginWithGoogle();
   }
 
-  // Future<UserCredential> _loginWithApple() async {
-  //   return await userRepository.loginWithApple();
-  // }
+  void _handleLoginSuccess(Emitter<LoginState> emit, UserCredential userCredential) {
+    emit(state.copyWith(
+      isLoading: false,
+      isAuthenticated: true,
+      user: userCredential.user,
+    ));
+  }
 
-  // Future<UserCredential> _loginWithKakao() async {
-  //   return await userRepository.loginWithKakao();
-  // }
+  void _handleLoginError(Emitter<LoginState> emit, Object error) {
+    emit(state.copyWith(
+      isLoading: false,
+      isAuthenticated: false,
+      error: error.toString(),
+    ));
+  }
 }
