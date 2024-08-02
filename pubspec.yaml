@@ -11,11 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Localization
-  flutter_localizations: 
-    sdk: flutter
-  localization: ^2.1.1
-  
+  # # Localization
+  # flutter_localizations: 
+  #   sdk: flutter
+  # localization: ^2.1.1
+  # intl: any
+
   # Core
   flutter_bloc: ^8.1.6
   get_it: ^7.7.0
@@ -28,6 +29,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_fonts: ^6.2.1
   table_calendar: ^3.1.2
+
+  # DB
+  flutter_secure_storage: ^9.2.2
 
   # Firebase
   firebase_auth: ^5.1.1
